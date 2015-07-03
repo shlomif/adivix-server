@@ -1,0 +1,4 @@
+- implement a simple, effective server framework
+  - run as a UNIX daemon
+  - use multiple threads for faster response/throughput
+    - the whole world is multicore

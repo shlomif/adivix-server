@@ -1,0 +1,16 @@
+- hack module to support postgresql
+  - pgsql.h + pgsql.c
+  - tables
+    - users
+      - id, name, passhash, priv, avatar
+    - privmsgs
+      - sender, recipients, perm, attachments, size, body
+    - files
+      - uid, gid, perm, size, data
+    - newsgroups
+      - id, name, perm, flags (priv, moder, ...),
+      	members (none -> public, moders)
+    - news
+      - uid, ngid, perm
+    - posts
+      - uid, fid (forum), date, perm
