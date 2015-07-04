@@ -73,8 +73,10 @@ srvinitsock(void)
 void *
 srvfunc(void *sockfd)
 {
-    int     fd = *(int *)sockfd;
+#if 0
+    int     clifd = *(int *)sockfd;
     ssize_t nread;
+#endif
 
     return NULL;                                                          
 }

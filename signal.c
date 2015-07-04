@@ -10,9 +10,8 @@ sigreap(int sig)
 {
     int waitret;
     
-    do {
-        nsrvproc--;
-    } while (wait(&waitret));
+    nsrvproc--;
+    wait(&waitret);
 
     return;
 }
