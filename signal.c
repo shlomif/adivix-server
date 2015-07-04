@@ -3,7 +3,7 @@
 #include <signal.h>
 #include <sys/wait.h>
 
-extern volatile nsrvproc;
+extern volatile long nsrvproc;
 
 void
 sigreap(int sig)
