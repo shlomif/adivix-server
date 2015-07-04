@@ -1,0 +1,5 @@
+- implement simple interface for PostgreSQL databases
+  - authentication
+- use TLS or somesuch for encrypted connections
+- create a generic client
+- implement a simple example protocol
