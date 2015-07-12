@@ -51,4 +51,3 @@ main(int argc, char *argv[])
     /* NOTREACHED */
     exit(0);
 }
-
