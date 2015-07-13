@@ -1,11 +1,11 @@
-#include <adivix/conf.h>
+#include <adivix-server/conf.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
 #include <syslog.h>
 #include <unistd.h>
-#include <adivix/srv.h>
+#include <adivix-server/srv.h>
 
 static pid_t  srvpids[NSERVERPROC];
 volatile long nsrvproc = 0;
