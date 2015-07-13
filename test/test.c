@@ -1,24 +1,19 @@
-<<<<<<< HEAD:test/test.c
 #include "conf.h"
-=======
-#include <adivix-server/conf.h>
->>>>>>> implementing thread poolswith C-Thread-Pools from github :):test.c
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
 #include <syslog.h>
 #include <unistd.h>
-<<<<<<< HEAD:test/test.c
 #include "srv.h"
-=======
-#include <adivix-server/srv.h>
->>>>>>> implementing thread poolswith C-Thread-Pools from github :):test.c
 #if (USE_THPOOL)
 #include <C-Thread-Pool/thpool.h>
 #endif
 
 extern threadpool srvthpool;
+=======
+#include <adivix/srv.h>
+>>>>>>> hacking around:test/test.c
 
 static pid_t  srvpids[NSERVERPROC];
 volatile long nsrvproc = 0;
@@ -28,7 +23,7 @@ main(int argc, char *argv[])
 {
     int   sockfd;
     pid_t pid;
-    long  ndx;
+    int   ndx;
 
     srvinitsignals();
     sockfd = srvinitsock();
