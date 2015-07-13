@@ -20,7 +20,7 @@ main(int argc, char *argv[])
 {
     int   sockfd;
     pid_t pid;
-    long  ndx;
+    int   ndx;
 
     srvinitsignals();
     sockfd = srvinitsock();
@@ -44,11 +44,11 @@ main(int argc, char *argv[])
             srvpids[nsrvproc] = pid;
             nsrvproc++;
         } else {
-            srvloop(sockfd, srvfunc, ndx);
+            srvloop(sockfd, srvfunc);
         }
     }
     do {
-        const sigset_t sigmask = { { 0 } };
+        const sigset_t sigmask = { 0 };
         
         sigsuspend(&sigmask);
     } while (nsrvproc);
