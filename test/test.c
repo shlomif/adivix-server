@@ -11,9 +11,6 @@
 #endif
 
 extern threadpool srvthpool;
-=======
-#include <adivix/srv.h>
->>>>>>> hacking around:test/test.c
 
 static pid_t  srvpids[NSERVERPROC];
 volatile long nsrvproc = 0;
