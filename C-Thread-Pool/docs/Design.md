@@ -18,6 +18,7 @@
 	            |                                                       |
 	            |   threadpool      | thread1 | thread2 | ..            |
 	            \_______________________________________________________/
+<<<<<<< HEAD
 
 
 	   Description:       Jobs are added to the job queue. Once a thread in the pool
@@ -38,10 +39,10 @@
 
 
 	   job0________
-	   |           |
 	   | function---->
 	   |           |
 	   |   arg------->
+<<<<<<< HEAD
 	   |           |         job1________
 	   |  next-------------->|           |
 	   |___________|         |           |..
