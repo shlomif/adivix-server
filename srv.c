@@ -1,4 +1,4 @@
-#include <adivix/conf.h>
+#include <adivix-server/conf.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +9,12 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <pthread.h>
-#include <adivix/srv.h>
+#include <adivix-server/srv.h>
+#if (USE_THPOOL)
+#include <C-Thread-Pool/thpool.h>
+#endif
+
+threadpool srvthpooltab[NSERVERPROC];
 
 void
 srvinitlog(char *srvname)
@@ -74,7 +79,7 @@ void *
 srvfunc(void *sockfd)
 {
 #if 0
-    int     clifd = *(int *)sockfd;
+    int     connfd = *(int *)sockfd;
     ssize_t nread;
 #endif
 
@@ -82,21 +87,32 @@ srvfunc(void *sockfd)
 }
 
 void
-srvloop(int sockfd, void *(*srvfunc)(void *))
+srvloop(int sockfd, void *(*srvfunc)(void *), long procid)
 {
+#if (!USE_THPOOL)
+#endif
     int                     retval;
-    intptr_t                clifd = -1;
+    intptr_t                connfd = -1;
     struct sockaddr_storage addrstore;
     socklen_t               addrsize = sizeof(addrstore);
+#if (USE_THPOOL)
+    threadpool              thpool;
+#endif
 
+#if (USE_THPOOL)
+    thpool = thpool_init(NSERVERTHREAD);
+    srvthpooltab[procid] = thpool;
+#endif
     while (1) {
+#if (!USE_THPOOL)
         pthread_t newthr;
+#endif
 
         do {
-            clifd = accept(sockfd, (struct sockaddr *)&addrstore, &addrsize);
-            if (clifd >= 0) {
+            connfd = accept(sockfd, (struct sockaddr *)&addrstore, &addrsize);
+            if (connfd >= 0) {
                 syslog(LOG_NOTICE, "accepted connection on fd %ld\n",
-                       (long)clifd);
+                       (long)connfd);
             } else if (errno == ECONNABORTED) {
                 syslog(LOG_NOTICE, "connection aborted\n");
             } else {
@@ -122,9 +138,13 @@ srvloop(int sockfd, void *(*srvfunc)(void *))
                         break;
                 }
             }
-        } while (clifd < 0 && errno == EINTR); /* retry interrupted system calls */
+        } while (connfd < 0 && errno == EINTR); /* retry interrupted system calls */
+
+#if (USE_THPOOL)
+        thpool_add_work(thpool, (void *)srvfunc, (void *)connfd);
+#else
         /* create a new thread to handle the [client] connection */
-        retval = pthread_create(&newthr, NULL, srvfunc, (void *)clifd);
+        retval = pthread_create(&newthr, NULL, srvfunc, (void *)connfd);
         if (retval) {
             syslog(LOG_CRIT, "failed to create server thread\n");
         } else {
@@ -132,6 +152,7 @@ srvloop(int sockfd, void *(*srvfunc)(void *))
         }
         /* do not wait for thread cancellation explicitly */
         pthread_detach(newthr);
+#endif
     }
 
     /* NOTREACHED */

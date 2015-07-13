@@ -1,9 +1,27 @@
-#include <adivix/conf.h>
+#include <adivix-server/conf.h>
 #include <stdlib.h>
 #include <signal.h>
 #include <sys/wait.h>
+#if (USE_THPOOL)
+#include <C-Thread-Pool/thpool.h>
+#endif
 
+extern threadpool    srvthpooltab[];
 extern volatile long nsrvproc;
+
+#if (USE_THPOOL)
+void
+sigdelthpool(void)
+{
+    long ndx;
+
+    for (ndx = 0 ; ndx < NSERVERPROC ; ndx++) {
+        thpool_destroy(srvthpooltab[ndx]);
+    }
+
+    return;
+}
+#endif
 
 void
 sigreap(int sig)
@@ -29,6 +47,9 @@ sigcrash(int sig)
 void
 sigdie(int sig)
 {
+#if (USE_THPOOL)
+    sigdelthpool();
+#endif
     exit(sig);
 }
 

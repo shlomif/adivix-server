@@ -6,7 +6,7 @@ void  srvinitsignals(void);
 /* srv.c */
 void  srvinitlog(char *srvname);
 int   srvinitsock(void);
-void  srvloop(int sockfd, void *(*srvfunc)(void *));
+void  srvloop(int sockfd, void *(*srvfunc)(void *), long procid);
 void *srvfunc(void *arg);
 /* daemon.c */
 int   daemonize(void);
