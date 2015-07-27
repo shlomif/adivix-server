@@ -20,7 +20,7 @@ main(int argc, char *argv[])
 {
     int   sockfd;
     pid_t pid;
-    int   ndx;
+    long  ndx;
 
     srvinitsignals();
     sockfd = srvinitsock();

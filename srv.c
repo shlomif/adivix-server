@@ -91,6 +91,7 @@ srvloop(int sockfd, void *(*srvfunc)(void *), long procid)
 {
 #if (!USE_THPOOL)
 #endif
+    int                     retval;
     intptr_t                connfd = -1;
     struct sockaddr_storage addrstore;
     socklen_t               addrsize = sizeof(addrstore);
