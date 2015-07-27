@@ -18,7 +18,7 @@ also how the optimized_compile test works.
 ````
 normal_compile    - Will run all tests above against a simply compiled threadpool.
 optimized_compile - Will run all tests but against a binary that was compiled
-                    with optimization flags.      
+                    with optimization flags.
 ````
 
 

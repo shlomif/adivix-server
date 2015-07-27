@@ -27,7 +27,7 @@ void
 sigreap(int sig)
 {
     int waitret;
-    
+
     nsrvproc--;
     wait(&waitret);
 

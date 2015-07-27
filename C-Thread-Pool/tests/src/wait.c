@@ -10,9 +10,9 @@
  *                                 number of threads,
  *                                 wait for each thread separetely (1)?
  *                                 how long each thread should run
- * 
+ *
  * Each job is to simply sleep for given amount of seconds.
- * 
+ *
  * */
 
 

@@ -83,7 +83,7 @@ srvfunc(void *sockfd)
     ssize_t nread;
 #endif
 
-    return NULL;                                                          
+    return NULL;
 }
 
 void
@@ -120,18 +120,18 @@ srvloop(int sockfd, void *(*srvfunc)(void *), long procid)
 #if defined(ENOMEM)
                     case ENOMEM:
                         syslog(LOG_CRIT, "out of memory\n");
-                        
+
                         exit(errno);
 #endif
                     case EBADF:
                     case ENOTSOCK:
                         syslog(LOG_CRIT, "invalid socket %d\n", sockfd);
-                        
+
                         exit(errno);
                     case EMFILE:
                     case ENFILE:
                         syslog(LOG_CRIT, "cannot create descriptor\n");
-                        
+
                         break;
                     default:
 

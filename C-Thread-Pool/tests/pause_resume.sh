@@ -16,7 +16,7 @@ function test_pause_resume_est7secs { #threads
 	compile src/pause_resume.c
 	realsecs=$(/usr/bin/time -f '%e' ./test "$1" 2>&1 > /dev/null)
 	threshold=1.00 # in secs
-	
+
 	ret=$(python -c "print(($realsecs-7)<=$threshold)")
 
 	if [ "$ret" == "True" ]; then

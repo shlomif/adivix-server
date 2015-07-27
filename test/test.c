@@ -49,7 +49,7 @@ main(int argc, char *argv[])
     }
     do {
         const sigset_t sigmask = { 0 };
-        
+
         sigsuspend(&sigmask);
     } while (nsrvproc);
 
