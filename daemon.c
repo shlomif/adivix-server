@@ -4,8 +4,8 @@
  * - Matthew 'kinetik' Gregan for suggested fixes
  */
 
-#include <adivix/conf.h>
-#include <adivix/srv.h>
+#include "conf.h"
+#include "srv.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
