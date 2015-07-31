@@ -17,5 +17,5 @@ ENABLE_TESTING()
 
 ADD_TEST(
     NAME perl_run_tests
-    COMMAND "bash" "-c" "cd ${CMAKE_CURRENT_SOURCE_DIR} && prove t/*.t"
+    COMMAND "bash" "-c" "export SRC_DIR='${CMAKE_CURRENT_SOURCE_DIR}' BIN_DIR='${CMAKE_CURREN_BINARY_DIR}'; cd ${CMAKE_CURRENT_SOURCE_DIR} && prove t/*.t"
 )
