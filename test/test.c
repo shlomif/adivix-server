@@ -44,7 +44,7 @@ main(int argc, char *argv[])
             srvpids[nsrvproc] = pid;
             nsrvproc++;
         } else {
-            srvloop(sockfd, srvfunc);
+            srvloop(sockfd, srvfunc, nsrvproc);
         }
     }
     do {
