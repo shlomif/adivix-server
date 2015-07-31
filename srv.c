@@ -1,4 +1,4 @@
-#include <adivix-server/conf.h>
+#include "conf.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +9,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <pthread.h>
-#include <adivix-server/srv.h>
+#include "srv.h"
 #if (USE_THPOOL)
 #include <C-Thread-Pool/thpool.h>
 #endif
@@ -83,7 +83,7 @@ srvfunc(void *sockfd)
     ssize_t nread;
 #endif
 
-    return NULL;                                                          
+    return NULL;
 }
 
 void
@@ -91,6 +91,7 @@ srvloop(int sockfd, void *(*srvfunc)(void *), long procid)
 {
 #if (!USE_THPOOL)
 #endif
+    int                     retval;
     intptr_t                connfd = -1;
     struct sockaddr_storage addrstore;
     socklen_t               addrsize = sizeof(addrstore);
@@ -119,18 +120,18 @@ srvloop(int sockfd, void *(*srvfunc)(void *), long procid)
 #if defined(ENOMEM)
                     case ENOMEM:
                         syslog(LOG_CRIT, "out of memory\n");
-                        
+
                         exit(errno);
 #endif
                     case EBADF:
                     case ENOTSOCK:
                         syslog(LOG_CRIT, "invalid socket %d\n", sockfd);
-                        
+
                         exit(errno);
                     case EMFILE:
                     case ENFILE:
                         syslog(LOG_CRIT, "cannot create descriptor\n");
-                        
+
                         break;
                     default:
 

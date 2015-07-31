@@ -1,4 +1,4 @@
-#include <adivix-server/conf.h>
+#include "conf.h"
 #include <stdlib.h>
 #include <signal.h>
 #include <sys/wait.h>
@@ -27,7 +27,7 @@ void
 sigreap(int sig)
 {
     int waitret;
-    
+
     nsrvproc--;
     wait(&waitret);
 

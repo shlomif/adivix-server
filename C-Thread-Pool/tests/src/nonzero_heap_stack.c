@@ -51,6 +51,6 @@ int main(){
 
 	puts("Killing threadpool");
 	thpool_destroy(thpool);
-	
+
 	return 0;
 }

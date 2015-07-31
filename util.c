@@ -1,4 +1,4 @@
-#include <adivix-server/conf.h>
+#include "conf.h"
 #if (USE_GETRLIMIT)
 #include <sys/resource.h>
 #else

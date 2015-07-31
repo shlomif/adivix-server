@@ -4,8 +4,8 @@
  * - Matthew 'kinetik' Gregan for suggested fixes
  */
 
-#include <adivix-server/conf.h>
-#include <adivix-server/srv.h>
+#include "conf.h"
+#include "srv.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
@@ -29,7 +29,7 @@ daemonize(void)
 
         exit(0);
     }
-    
+
     /* CHILD PROCESS */
 
     /* create new session */
@@ -47,7 +47,7 @@ daemonize(void)
 
         exit(0);
     }
-    
+
     /* CHILD PROCESS */
 
     /* change current working directory */

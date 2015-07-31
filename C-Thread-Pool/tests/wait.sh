@@ -32,10 +32,10 @@ function test_wait_pool { #threads #jobs
 	compile src/wait.c
 	realsecs=$(time_exec ./test $2 $1 0)
 	threshold=1.00 # in secs
-	
+
 	expected_time=$(python -c "import math; print(math.ceil($2/$1.0))")
 	ret=$(python -c "print((abs($realsecs-$expected_time))<=$threshold)")
-	
+
 	if [ "$ret" == "True" ]; then
 		return
 	fi

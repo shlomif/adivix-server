@@ -1,11 +1,16 @@
-#include <adivix-server/conf.h>
+#include "conf.h"
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
 #include <syslog.h>
 #include <unistd.h>
-#include <adivix-server/srv.h>
+#include "srv.h"
+#if (USE_THPOOL)
+#include <C-Thread-Pool/thpool.h>
+#endif
+
+extern threadpool srvthpool;
 
 static pid_t  srvpids[NSERVERPROC];
 volatile long nsrvproc = 0;
@@ -43,8 +48,8 @@ main(int argc, char *argv[])
         }
     }
     do {
-        const sigset_t sigmask = { { 0 } };
-        
+        const sigset_t sigmask = { 0 };
+
         sigsuspend(&sigmask);
     } while (nsrvproc);
 
