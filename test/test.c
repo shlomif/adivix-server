@@ -39,11 +39,11 @@ main(int argc, char *argv[])
             srvpids[nsrvproc] = pid;
             nsrvproc++;
         } else {
-            srvloop(sockfd, srvfunc);
+            srvloop(sockfd, srvfunc, ndx);
         }
     }
     do {
-        const sigset_t sigmask = { 0 };
+        const sigset_t sigmask = { { 0 } };
         
         sigsuspend(&sigmask);
     } while (nsrvproc);
@@ -51,3 +51,4 @@ main(int argc, char *argv[])
     /* NOTREACHED */
     exit(0);
 }
+
